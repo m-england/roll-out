@@ -31,12 +31,9 @@ export class WorkflowEventsService {
   private doCheckAuthorization(path: string[]): boolean {
     if (path.length) {
       const entry = this.findEntry(this.WORKFLOW_EVENTS, path);
-      if (entry && entry['permittedRoles']
-             && this.userRoles.size) {
-        return entry.permittedRoles
-        .some(permittedRole => this.userRoles.has(permittedRole));
+      if (entry && entry['permittedRoles'] && this.userRoles.size) {
+        return entry.permittedRoles.some(permittedRole => this.userRoles.has(permittedRole));
       }
-      return false;
     }
     return false;
   }
