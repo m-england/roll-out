@@ -1,3 +1,14 @@
-<p>
-  user-info works!
-</p>
+<nav class="panel">
+    <p class="panel-heading">
+        Current User
+    </p>
+    <p class="panel-block">
+        Name : {{(user|async).userName}}
+    </p>
+    <p class="panel-block">
+        Email : {{(user|async).email}}
+    </p>
+    <p class="panel-block">
+        Roles : {{(user|async).roles}}
+    </p>
+</nav>

@@ -13,7 +13,7 @@ export class WorkflowEventsService {
 
   constructor(private userService: UserService) {}
 
-  public checkAuthorization(path: any): Observable<boolean> {
+  public checkAuthorization(path: string[]): Observable<boolean> {
    if (!this.userRoles) {
       return this.userService.getUser()
         .pipe(
@@ -28,7 +28,7 @@ export class WorkflowEventsService {
     return of(this.doCheckAuthorization(path));
   }
 
-  private doCheckAuthorization(path: string[]): boolean {
+  public doCheckAuthorization(path: string[]): boolean {
     if (path.length) {
       const entry = this.findEntry(this.WORKFLOW_EVENTS, path);
       if (entry && entry['permittedRoles'] && this.userRoles.size) {

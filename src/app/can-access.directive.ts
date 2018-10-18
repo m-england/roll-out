@@ -1,16 +1,21 @@
-import { Directive, OnInit, OnDestroy, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, OnInit, OnDestroy, Input, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WorkflowEventsService } from './workflow-events.service';
 
 @Directive({
-  selector: '[appCanAccess]'
+  selector: '[CanAccess]'
 })
 export class CanAccessDirective implements OnInit, OnDestroy {
-  @Input('appCanAccess') appCanAccess: string | string[];
+  private _canAccess: string[]; 
+
+  @Input('CanAccess')
+  set appCanAccess(value: string) {
+    this._canAccess = JSON.parse(value);
+  }
+
   private permission$: Subscription;
 
-  constructor(private templateRef: TemplateRef<any>,
-              private viewContainer: ViewContainerRef,
+  constructor(private el: ElementRef,
               private workflowEvents: WorkflowEventsService) {
   }
 
@@ -19,13 +24,9 @@ export class CanAccessDirective implements OnInit, OnDestroy {
   }
 
   private applyPermission(): void {
-    this.permission$ = this.workflowEvents.checkAuthorization(this.appCanAccess)
+    this.permission$ = this.workflowEvents.checkAuthorization(this._canAccess)
       .subscribe(authorized => {
-        if (authorized) {
-          this.viewContainer.createEmbeddedView(this.templateRef);
-        } else {
-          this.viewContainer.clear();
-        }
+        this.el.nativeElement.disabled = authorized;
       });
   }
 

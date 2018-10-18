@@ -1,3 +1,12 @@
-<p>
-  User: {{(user | async).userName}}
-</p>
+<div class="container">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <p class="control">
+            Name: <input class="input" type="text" formControlName="name" CanAccess='["taskedit", "name"]'>
+        </p>
+        <p class="control">
+            Desc: <input class="input" type="text" formControlName="description" CanAccess='["taskedit", "description"]'>
+        </p>
+        <button type="submit" class="button is-success">Save Task</button>
+        <button type="button" (click)="save.emit(null)" class="button is-info">Cancel</button>
+    </form>
+</div>

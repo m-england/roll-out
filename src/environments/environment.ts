@@ -1,43 +1,33 @@
 export const environment = {
   production: false,
   workflow:   {
-    'open': {
-        'submit': {
+    'taskedit': {
+        'name': {
             'permittedRoles': [
                 'AM'
             ]
-        }
-    },
-    'pending': {
-        'sendToBorrower': {
-            'permittedRoles': [
-                'LO'
-            ]
         },
-        'requestMoreInfo': {
+        'description': {
             'permittedRoles': [
                 'LO',
                 'AM'
             ]
-        }
-    },
-    'sendToBorrower': {
-        'approve': {
-            'permittedRoles': [
-                'B'
-            ]
         },
-        'reject': {
-            'permittedRoles': [
-                'LO'
-            ]
-        }
-    },
-    'approved': {
-        'complete': {
-            'permittedRoles': [
-                'AM'
-            ]
+        'assigned': {
+            'open': {
+                'permittedRoles': [
+                    'LO',
+                    'AM'
+                ]
+            },
+            'inprogress': {
+                'permittedRoles': [                    
+                    'AM'
+                ]
+            },
+            'complete': {
+                'permittedRoles': []
+            }
         }
     }
 }

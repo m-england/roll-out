@@ -7,6 +7,9 @@ import { TaskComponent } from './task/task.component';
 import { CanAccessDirective } from './can-access.directive';
 import { TaskListComponent } from './task-list/task-list.component';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { SummaryComponent } from './summary/summary.component';
+import { ManagementComponent } from './management/management.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,10 +17,13 @@ import { UserInfoComponent } from './user-info/user-info.component';
     TaskComponent,
     CanAccessDirective,
     TaskListComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    SummaryComponent,
+    ManagementComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

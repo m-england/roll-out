@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TaskComponent } from './task/task.component';
+import { SummaryComponent } from './summary/summary.component';
+import { ManagementComponent } from './management/management.component';
 
 const routes: Routes = [
-  { path: 'task', component: TaskComponent },
+  { path: 'summary', component: SummaryComponent },
+  { path: 'manage', component: ManagementComponent },
   { path: '',
-    redirectTo: '/task',
+    redirectTo: '/summary',
     pathMatch: 'full'
   }
 ];
