@@ -22,7 +22,7 @@ export class UserService {
     const newUser = new User();
     newUser.userName = 'Mark';
     newUser.email = 'test@tmoney.us';
-    newUser.roles = ['LO'];
+    newUser.role = 'LO';
 
     this.hasUser = true;
     this.userSubject.next(newUser);

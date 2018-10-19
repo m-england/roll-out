@@ -9,12 +9,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
-  public user: Observable<User>;
+  public user: User;
+  public roles: string[];
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.user = this.userService.getUser();
+    this.roles = ['AM', 'LO', 'UW'];
+    this.userService.getUser().subscribe(u => this.user = u);
   }
 
+  print() {
+    console.log(this.user);
+  }
 }

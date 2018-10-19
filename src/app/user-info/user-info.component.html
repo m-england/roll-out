@@ -1,14 +1,19 @@
 <nav class="panel">
-    <p class="panel-heading">
+    <p class="panel-heading" (click)="print()">
         Current User
     </p>
     <p class="panel-block">
-        Name : {{(user|async).userName}}
+        Name : {{user.userName}}
     </p>
     <p class="panel-block">
-        Email : {{(user|async).email}}
+        Email : {{user.email}}
     </p>
-    <p class="panel-block">
-        Roles : {{(user|async).roles}}
-    </p>
+    <div class="panel-block">
+        Role : &nbsp;
+        <div class="select">
+            <select [(ngModel)]="user.role">
+                <option *ngFor="let role of roles">{{role}}</option>
+            </select>
+        </div>
+    </div>
 </nav>

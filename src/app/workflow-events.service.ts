@@ -17,7 +17,7 @@ export class WorkflowEventsService {
    if (!this.userRoles) {
       return this.userService.getUser()
         .pipe(
-        map(currentUser => currentUser.roles),
+        map(currentUser => currentUser.role),
         tap(userRoles => {
           this.userRoles = new Set(userRoles);
         }),
