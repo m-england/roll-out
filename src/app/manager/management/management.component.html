@@ -1,0 +1,7 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="content">
+  <ul>
+    <li *ngFor="let key of objectKeys(currentLevel)" (click)="setPath(key)">{{key}}</li>
+  </ul>
+</div>

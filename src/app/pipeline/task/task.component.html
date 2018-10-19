@@ -1,0 +1,20 @@
+<div class="container">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="control">
+            Name: <input class="input" type="text" formControlName="name" [CanEdit]='["taskedit", "name"]'>
+        </div>
+        <div class="control">
+            Desc: <input class="input" type="text" formControlName="description" [CanEdit]='["taskedit", "description"]'>
+        </div>
+        <div class="control">
+            <br />
+            <div class="select">
+                <select formControlName="status">
+                    <option *ngFor="let status of statuses" [value]="status" [CanEdit]="['taskedit', 'status', status]">{{status}}</option>
+                </select>               
+            </div>
+        </div>
+        <button type="submit" class="button is-success">Save Task</button>&nbsp;
+        <button type="button" (click)="save.emit(null)" class="button is-info">Cancel</button>
+    </form>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
-import { User } from './models/user';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ import { User } from './models/user';
 export class UserService {
   private userSubject = new ReplaySubject<User>(1);
   private hasUser: boolean = false;
+  private user: User = null;
 
   constructor() { }
 
@@ -18,14 +19,22 @@ export class UserService {
     return this.userSubject.asObservable();
   }
 
+  public updateRole(role: string): void {
+    if (role) { this.user.role = role; }
+    this.updateSubscribers();
+  }
+
   private fetchUser(): void {
     const newUser = new User();
     newUser.userName = 'Mark';
     newUser.email = 'test@tmoney.us';
-    newUser.role = 'LO';
+    newUser.role = 'UW';
 
-    this.hasUser = true;
-    this.userSubject.next(newUser);
-    this.userSubject.complete();
+    this.user = newUser;
+    this.updateSubscribers();
+  }
+
+  private updateSubscribers() {
+    this.userSubject.next(this.user);
   }
 }

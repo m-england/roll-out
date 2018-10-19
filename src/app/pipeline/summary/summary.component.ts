@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../models/task';
+import { Task } from 'src/app/models/task';
 
 @Component({
   selector: 'app-summary',
@@ -14,6 +14,7 @@ export class SummaryComponent implements OnInit {
   }
 
   selectTask(task: Task) {
+    this.selectedTask = null;
     this.selectedTask = task;
   }
 

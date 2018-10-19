@@ -1,36 +1,44 @@
 export const environment = {
   production: false,
-  workflow:   {
+  workflow: {
+    'ratelock': {
+        'permittedRoles': [
+            'LO'
+        ]
+    },
     'taskedit': {
-        'name': {
-            'permittedRoles': [
-                'AM'
-            ]
+      'name': {
+        'permittedRoles': [
+          'AM'
+        ]
+      },
+      'description': {
+        'permittedRoles': [
+          'LO',
+          'AM'
+        ]
+      },
+      'status': {
+        'Open': {
+          'permittedRoles': [
+            'LO',
+            'AM'
+          ]
         },
-        'description': {
-            'permittedRoles': [
-                'LO',
-                'AM'
-            ]
+        'InProgress': {
+          'permittedRoles': [
+            'AM'
+          ]
         },
-        'assigned': {
-            'open': {
-                'permittedRoles': [
-                    'LO',
-                    'AM'
-                ]
-            },
-            'inprogress': {
-                'permittedRoles': [                    
-                    'AM'
-                ]
-            },
-            'complete': {
-                'permittedRoles': []
-            }
+        'Completed': {
+          'permittedRoles': ['UW']
+        },
+        'Omitted': {
+          'permittedRoles' : ['all']
         }
+      }
     }
-}
+  }
 };
 
 /*

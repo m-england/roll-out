@@ -2,7 +2,7 @@ import { TestBed, inject, async } from '@angular/core/testing';
 
 import { WorkflowEventsService } from './workflow-events.service';
 import { Observable, of, ReplaySubject } from 'rxjs';
-import { User } from './models/user';
+import { User } from '../models/user';
 import { UserService } from './user.service';
 
 class FakeUserService {
@@ -12,7 +12,7 @@ class FakeUserService {
   public getUser(): Observable<User> {
     const user = new User();
     user.roles = ['LO'];
-    return of(user)
+    return of(user);
   };
 
   private fetchUser() {}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, pipe } from 'rxjs';
 import { map, tap} from 'rxjs/operators';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -9,17 +9,17 @@ import { UserService } from './user.service';
 })
 export class WorkflowEventsService {
   private readonly WORKFLOW_EVENTS = environment['workflow'];
-  private userRoles: Set<string>;
+  private userRole: string;
 
   constructor(private userService: UserService) {}
 
   public checkAuthorization(path: string[]): Observable<boolean> {
-   if (!this.userRoles) {
+   if (!this.userRole) {
       return this.userService.getUser()
         .pipe(
         map(currentUser => currentUser.role),
-        tap(userRoles => {
-          this.userRoles = new Set(userRoles);
+        tap(userRole => {
+          this.userRole = userRole;
         }),
         map(() => this.doCheckAuthorization(path))
         );
@@ -28,11 +28,16 @@ export class WorkflowEventsService {
     return of(this.doCheckAuthorization(path));
   }
 
+  public getWorkflow(): any {
+    return this.WORKFLOW_EVENTS;
+  }
+
   public doCheckAuthorization(path: string[]): boolean {
     if (path.length) {
       const entry = this.findEntry(this.WORKFLOW_EVENTS, path);
-      if (entry && entry['permittedRoles'] && this.userRoles.size) {
-        return entry.permittedRoles.some(permittedRole => this.userRoles.has(permittedRole));
+      if (entry && entry['permittedRoles'] && this.userRole) {
+        const test = entry.permittedRoles.includes(this.userRole) || entry.permittedRoles.includes('all');
+        return test;
       }
     }
     return false;

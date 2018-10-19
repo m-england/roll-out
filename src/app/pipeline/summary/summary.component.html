@@ -1,9 +1,15 @@
+<app-nav-bar></app-nav-bar>
 <div class="columns is-multiline is-mobile is-fullwidth  has-text-centered">
     <div class="column is-half is-primary">
         <app-task-list (select)="selectTask($event)"></app-task-list>
     </div>
     <div class="column is-half">
         <app-user-info></app-user-info>
+    </div>
+    <div class="column is-full">
+        <div class="notification is-warning" *CanView='["ratelock"]'>
+            The Rate Lock Status is Yellow or something.
+        </div>
     </div>
     <div class="column">
         <app-task [task]="selectedTask" (save)="onSave()" *ngIf="selectedTask"></app-task>

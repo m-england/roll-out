@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TaskComponent } from './task/task.component';
-import { SummaryComponent } from './summary/summary.component';
-import { ManagementComponent } from './management/management.component';
+import { ManagementComponent } from './manager/management/management.component';
+import { SummaryComponent } from './pipeline/summary/summary.component';
 
 const routes: Routes = [
   { path: 'summary', component: SummaryComponent },

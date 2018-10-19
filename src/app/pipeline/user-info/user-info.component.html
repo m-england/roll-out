@@ -1,0 +1,22 @@
+<nav class="panel">
+  <form [formGroup]="userForm">
+    <p class="panel-heading" (click)="print()">
+      Current User
+    </p>
+    <p class="panel-block">
+      Name : {{user.userName}}
+    </p>
+    <p class="panel-block">
+      Email : {{user.email}}
+    </p>
+    <div class="panel-block">
+      <div class="control">
+        <div class="select">
+          <select formControlName="role" (change)="changeRole($event)">
+            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</nav>

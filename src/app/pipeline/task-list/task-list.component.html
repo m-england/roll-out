@@ -1,0 +1,8 @@
+<nav class="panel">
+    <p class="panel-heading">
+        Tasks
+    </p>
+    <p *ngFor="let task of tasks |async" class="panel-block" (click)="selectTask(task)">
+        {{task.name}} - {{task.status}}
+    </p>
+</nav>

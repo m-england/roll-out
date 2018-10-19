@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { Task } from '../models/task';
-import { TaskService } from '../task.service';
+import { Task } from 'src/app/models/task';
+import { TaskService } from 'src/app/core/task.service';
 
 @Component({
   selector: 'app-task',
@@ -13,16 +13,19 @@ export class TaskComponent implements OnChanges {
   @Input() task: Task;
   @Output() save = new EventEmitter<Task>();
 
+  public statuses: string[] = ['Open', 'InProgress', 'Completed', 'Omitted'];
+
   taskForm = this.fb.group({
     id: [''],
     name: ['', Validators.required],
-    description: ['']
+    description: [''],
+    status: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder, private taskService: TaskService) { }
 
   ngOnChanges() {
-    this.taskForm.patchValue(this.task);   
+    this.taskForm.patchValue(this.task);
   }
 
   onSubmit() {
