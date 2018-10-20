@@ -13,5 +13,6 @@ export class Task {
     description: string;
     status: string;
     assigned: string;
+    reminder: Date;
 }
 

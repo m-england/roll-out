@@ -21,10 +21,9 @@ export class CanViewDirective implements OnInit, OnDestroy {
   private applyPermission(): void {
     this.permission$ = this.workflowEvents.checkAuthorization(this.CanView)
       .subscribe(authorized => {
+        this.viewContainer.clear();
         if (authorized) {
           this.viewContainer.createEmbeddedView(this.templateRef);
-        } else {
-          this.viewContainer.clear();
         }
       });
   }

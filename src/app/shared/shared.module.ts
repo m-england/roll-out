@@ -14,6 +14,11 @@ import { AppRoutingModule } from '../app-routing.module';
     NavBarComponent,
     CanViewDirective,
     CanEditDirective
+  ],
+  exports: [
+    NavBarComponent,
+    CanViewDirective,
+    CanEditDirective
   ]
 })
 export class SharedModule { }

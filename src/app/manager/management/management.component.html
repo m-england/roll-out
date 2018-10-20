@@ -1,7 +1,6 @@
 <app-nav-bar></app-nav-bar>
+<button class="button is-success" (click)="save()">Save</button>
+<button class="button is-info" (click)="print()">Print</button>
+<br />
 
-<div class="content">
-  <ul>
-    <li *ngFor="let key of objectKeys(currentLevel)" (click)="setPath(key)">{{key}}</li>
-  </ul>
-</div>
+<json-editor [options]="editorOptions" [(data)]="workflow"></json-editor>

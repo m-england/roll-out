@@ -11,7 +11,7 @@
             <div class="select">
                 <select formControlName="status">
                     <option *ngFor="let status of statuses" [value]="status" [CanEdit]="['taskedit', 'status', status]">{{status}}</option>
-                </select>               
+                </select>
             </div>
         </div>
         <button type="submit" class="button is-success">Save Task</button>&nbsp;

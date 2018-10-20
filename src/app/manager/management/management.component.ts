@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkflowEventsService } from 'src/app/core/workflow-events.service';
+import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 
 @Component({
   selector: 'app-management',
@@ -7,21 +8,25 @@ import { WorkflowEventsService } from 'src/app/core/workflow-events.service';
   styleUrls: ['./management.component.scss']
 })
 export class ManagementComponent implements OnInit {
-  public objectKeys = Object.keys;
+  public editorOptions: JsonEditorOptions;
   public workflow: any;
-  public currentLevel: any;
-
-  public breadCrumbs: string[] = ['root'];
+  @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
 
   constructor(private workflowEvents: WorkflowEventsService) { }
 
   ngOnInit() {
+    this.editorOptions = new JsonEditorOptions();
+    this.editorOptions.mode = 'tree';
+    this.editorOptions.modes = ['code', 'tree'];
     this.workflow = this.workflowEvents.getWorkflow();
-    this.currentLevel = this.workflow;
   }
 
-  setPath(path: string) {
-    this.breadCrumbs.push(path);
-    this.currentLevel = this.currentLevel[path];
+  print() {
+    console.log(this.workflow);
+  }
+
+  save() {
+    this.workflow = this.editor.get();
+    this.workflowEvents.setWorkflow(this.workflow);
   }
 }

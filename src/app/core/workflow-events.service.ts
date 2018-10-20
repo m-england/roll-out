@@ -8,33 +8,33 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class WorkflowEventsService {
-  private readonly WORKFLOW_EVENTS = environment['workflow'];
+  private workflowEvents = environment['workflow'];
   private userRole: string;
 
   constructor(private userService: UserService) {}
 
   public checkAuthorization(path: string[]): Observable<boolean> {
-   if (!this.userRole) {
-      return this.userService.getUser()
-        .pipe(
-        map(currentUser => currentUser.role),
-        tap(userRole => {
-          this.userRole = userRole;
-        }),
-        map(() => this.doCheckAuthorization(path))
-        );
-    }
-
-    return of(this.doCheckAuthorization(path));
+    return this.userService.getUser()
+      .pipe(
+      map(currentUser => currentUser.role),
+      tap(userRole => {
+        this.userRole = userRole;
+      }),
+      map(() => this.doCheckAuthorization(path))
+      );
   }
 
   public getWorkflow(): any {
-    return this.WORKFLOW_EVENTS;
+    return this.workflowEvents;
+  }
+
+  public setWorkflow(newWorkflow: any) {
+    this.workflowEvents = newWorkflow;
   }
 
   public doCheckAuthorization(path: string[]): boolean {
     if (path.length) {
-      const entry = this.findEntry(this.WORKFLOW_EVENTS, path);
+      const entry = this.findEntry(this.workflowEvents, path);
       if (entry && entry['permittedRoles'] && this.userRole) {
         const test = entry.permittedRoles.includes(this.userRole) || entry.permittedRoles.includes('all');
         return test;

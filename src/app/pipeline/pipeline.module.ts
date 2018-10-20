@@ -5,11 +5,13 @@ import { TaskComponent } from './task/task.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   declarations: [
     SummaryComponent,
